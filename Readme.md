@@ -47,11 +47,21 @@ pip install -r requirement.txt
 
 1. Open the `settings.py` file and set up the `TRANSACTION_FEE`, `MAX_TRANSACTION_VOL` and other values.
 
-2.Run the bot:
+2. Run the bot:
 
 ```
 python main.py
 ```
+
+## Customization
+
+You can customize the following parameters in the `settings.py` script inside config constant:
+
+- `price_range`: The range of fictional prices.
+- `volume_range`: The range of fictional volumes.
+- `start_date`: The start date for generating price data.
+- `end_date`: The end date for generating price data.
+- `frequency`: The time between data points.
 
 The bot will perform the arbitrage simulation for the specified exchange pairs and write the results to the `logs.txt` file.
 Also you may see results inside console.
