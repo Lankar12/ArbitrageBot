@@ -79,3 +79,19 @@ pairs_to_monitor = [
         # Add more pairs if needed
         ]
 ```
+
+And change next code:
+```python 
+    trades = all_trades[0]
+
+    bot.display_trade_details(trades, bot.logger)
+    bot.display_trade_summary(trades, bot.logger)
+    bot.plot_trade_profit_over_time(trades)
+```
+To:
+```python 
+    for trade in all_trades:
+        bot.display_trade_details(trades, bot.logger)
+        bot.display_trade_summary(trades, bot.logger)
+        bot.plot_trade_profit_over_time(trades)
+```
