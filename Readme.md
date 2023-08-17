@@ -47,7 +47,12 @@ pip install -r requirement.txt
 
 1. Open the `settings.py` file and set up the `TRANSACTION_FEE`, `MAX_TRANSACTION_VOL` and other values.
 
-2. Run the bot:
+2. Generate a fictional data:
+```
+python generate_fiction_data.py
+```
+
+3. Run the bot:
 
 ```
 python main.py
