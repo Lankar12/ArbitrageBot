@@ -5,10 +5,10 @@ LOG_FILE = 'logs.txt'
 
 #config of prices and volumes
 config = {
-    'price_range': (20000, 50000),
-    'volume_range': (1000, 10000),
+    'price_range': (25000, 35000),
+    'volume_range': (1, 100),
     'start_date': datetime(2023, 1, 1),
-    'end_date': datetime(2023, 1, 10),
+    'end_date': datetime(2023, 1, 5),
     'frequency': '1H'
 }
 

@@ -9,6 +9,13 @@ from settings import config, LOG_FILE
 
 class CryptoPriceGenerator(SetupLoger):
     def __init__(self, config: Dict[str, Any]):
+        """
+        Initialize the CryptoPriceGenerator with configuration settings.
+
+        Args:
+            config (Dict[str, Any]): A dictionary containing configuration settings for generating price data.
+                                     It should include 'start_date', 'end_date', 'frequency', 'price_range', and 'volume_range'.
+        """
         super().__init__()  # Call the constructor of the parent class
         self.start_date: datetime = config['start_date']
         self.end_date: datetime = config['end_date']
@@ -17,6 +24,12 @@ class CryptoPriceGenerator(SetupLoger):
         self.volume_range: tuple = config['volume_range']
 
     def generate_price_data(self) -> pd.DataFrame:
+        """
+        Generate fictional price data for cryptocurrency exchanges.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing generated price and volume data for two exchanges.
+        """
         try:
             timestamps = pd.date_range(start=self.start_date, end=self.end_date, freq=self.frequency)
             num_timestamps: int = len(timestamps)

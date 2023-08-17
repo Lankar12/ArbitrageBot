@@ -201,8 +201,8 @@ class ArbitrageBot(SetupLoger):
 
         # Plot the prices from both exchanges
         plt.figure(figsize=(10, 6))
-        plt.plot(timestamps, exchange1_prices, label='Exchange 1')
-        plt.plot(timestamps, exchange2_prices, label='Exchange 2')
+        plot1, = plt.plot(timestamps, exchange1_prices, label='Exchange 1')
+        plot2, = plt.plot(timestamps, exchange2_prices, label='Exchange 2')
 
         # Highlight the top 10% arbitrage opportunities
         for trade in trade_opportunities[:num_to_highlight]:
@@ -212,10 +212,18 @@ class ArbitrageBot(SetupLoger):
 
             plt.axvline(x=opportunity_timestamp, color='r', linestyle='--', label=f'Profit (+{profit:.2f})')
 
+        # Create a custom legend entry for the red dashed line
+        custom_legend_entry = plt.Line2D([0], [0], color='r', linestyle='--', label=f'Profit')
+
+        # Combine all legend entries
+        handles = [plot1, plot2, custom_legend_entry]
+        labels = [h.get_label() for h in handles]
+
+
         plt.xlabel('Timestamp')
         plt.ylabel('Price')
         plt.title('Prices from Both Exchanges Over Time')
-        plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+        plt.legend(handles=handles, labels=labels, loc='upper left', bbox_to_anchor=(1, 1))
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.show()
@@ -234,11 +242,11 @@ async def main() -> None:
         tasks.append(bot.get_arbitrage_opportunities())
 
     all_trades = await asyncio.gather(*tasks)
+    trades = all_trades[0]
 
-    for trades in all_trades:
-        bot.display_trade_details(trades, bot.logger)
-        bot.display_trade_summary(trades, bot.logger)
-        bot.plot_trade_profit_over_time(trades)
+    bot.display_trade_details(trades, bot.logger)
+    bot.display_trade_summary(trades, bot.logger)
+    bot.plot_trade_profit_over_time(trades)
 
 
 if __name__ == '__main__':
